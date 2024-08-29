@@ -6,7 +6,7 @@ function toggleMenu() {
 
 // ニュースを取得して表示する
 async function fetchNews() {
-    const apiKey = '440f439297b7463f9411a7ef46cf4cd4'; // 実際のAPIキーをここに入力してください
+    const apiKey = '1ea6cb85d8e4996c79c2702af1335e72'; // 実際のAPIキーをここに入力してください
     const url = ` https://api.worldnewsapi.com/top-news?source-country=us&date=2024-08-30`;
     try {
         const response = await fetch(url);
