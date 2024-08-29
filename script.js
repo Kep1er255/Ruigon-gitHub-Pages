@@ -6,10 +6,8 @@ const newsUrl = `https://newsdata.io/api/1/latest?apikey=${newsApiKey}&q=joe%20b
 const weatherApiKey = 'd5d3fdcd5ab1c58049c54abd5d5038a2';
 const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=35.682839&longitude=139.759455&hourly=temperature_2m&timezone=Asia%2FTokyo`;
 
-// 株価APIキーとURL
-const stockApiKey = 'h4p6gCFDsDOVVIoG5kmL5sOai7x8UcSV';
-const stockId = '12bcb638-ac88-44f9-bbba-5eaf9c4033e0';
-const stockUrl = `https://api.stockapi.net/api/v1/stocks?apikey=${stockApiKey}&id=${stockId}`;
+// 株価APIのURL
+const stockApiUrl = 'https://api.polygon.io/v3/reference/conditions?asset_class=stocks&limit=10&apiKey=h4p6gCFDsDOVVIoG5kmL5sOai7x8UcSV';
 
 // ニュースを取得して表示する関数
 async function fetchNews() {
@@ -17,13 +15,15 @@ async function fetchNews() {
         const response = await fetch(newsUrl);
         const data = await response.json();
         
-        if (data.results) {
+        console.log(data); // レスポンスをコンソールに出力
+        
+        if (data.articles) {
             const newsList = document.getElementById('newsList');
             newsList.innerHTML = ''; // 現在のリストをクリア
             
-            data.results.forEach(article => {
+            data.articles.forEach(article => {
                 const li = document.createElement('li');
-                li.innerHTML = `<a href="${article.link}" target="_blank">${article.title}</a>`;
+                li.innerHTML = `<a href="${article.url}" target="_blank">${article.title}</a>`;
                 newsList.appendChild(li);
             });
         } else {
@@ -39,6 +39,8 @@ async function fetchWeather() {
     try {
         const response = await fetch(weatherUrl);
         const data = await response.json();
+        
+        console.log(data); // レスポンスをコンソールに出力
         
         const temperatures = data.hourly.temperature_2m;
         const labels = temperatures.map((_, index) => index + '時');
@@ -73,26 +75,24 @@ async function fetchWeather() {
     }
 }
 
-// 株価を取得して表示する関数
-async function fetchStocks() {
+// 株価情報を取得して表示する関数
+async function fetchStockConditions() {
     try {
-        const response = await fetch(stockUrl);
+        const response = await fetch(stockApiUrl);
         const data = await response.json();
         
-        if (data.stocks) {
-            const stocksList = document.getElementById('stocksList');
-            stocksList.innerHTML = ''; // 現在のリストをクリア
-            
-            data.stocks.forEach(stock => {
-                const li = document.createElement('li');
-                li.innerHTML = `${stock.name}: ${stock.price}円`;
-                stocksList.appendChild(li);
-            });
-        } else {
-            console.error('株価データが取得できませんでした。');
-        }
+        console.log(data); // コンソールにデータを表示
+
+        const stockConditionsList = document.getElementById('stocksList');
+        stockConditionsList.innerHTML = ''; // 現在のリストをクリア
+
+        data.results.forEach(condition => {
+            const li = document.createElement('li');
+            li.innerHTML = `Condition: ${condition.name}, Abbreviation: ${condition.abbreviation}`;
+            stockConditionsList.appendChild(li);
+        });
     } catch (error) {
-        console.error('株価取得中にエラーが発生しました:', error);
+        console.error('株価条件の取得中にエラーが発生しました:', error);
     }
 }
 
@@ -100,6 +100,6 @@ async function fetchStocks() {
 document.addEventListener('DOMContentLoaded', () => {
     fetchNews();
     fetchWeather();
-    fetchStocks();
+    fetchStockConditions();
 });
 
