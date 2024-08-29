@@ -1,6 +1,6 @@
-// ニュースAPIキーとURL
+// ニュースAPIキーとURL（日本のニュース）
 const newsApiKey = 'pub_52029e67944ed57d05729b9424dc003476213';
-const newsUrl = `https://newsdata.io/api/1/latest?apikey=${newsApiKey}&q=joe%20biden&country=us&domainurl=news.google.com`;
+const newsUrl = `https://newsdata.io/api/1/latest?apikey=${newsApiKey}&country=jp`; // 日本のニュースを取得するURL
 
 // 天気APIキーとURL（東京の天気）
 const weatherApiKey = 'd5d3fdcd5ab1c58049c54abd5d5038a2';
