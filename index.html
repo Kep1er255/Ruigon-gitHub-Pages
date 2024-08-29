@@ -12,31 +12,31 @@
             <span class="menu-icon" onclick="toggleMenu()">☰</span>
             <h1>Ruigon gitHub Pages</h1>
         </div>
-        <div id="weatherCard">
+        <div id="weatherCard" class="rectangle">
             <h2 class="section-title">東京の天気予報</h2>
             <canvas id="weatherChart"></canvas>
         </div>
-        <div id="stocksCard">
+        <div id="stocksCard" class="rectangle">
             <h2 class="section-title">株価</h2>
             <canvas id="stockChart"></canvas> <!-- グラフを表示するためのキャンバス -->
             <ul id="stocksList">
                 <!-- 株価項目がここに追加されます -->
             </ul>
         </div>
-        <div id="newsCard">
+        <div id="newsCard" class="rectangle">
             <h2 class="section-title">最新ニュース</h2>
             <ul id="newsList">
                 <!-- ニュース項目がここに追加されます -->
             </ul>
         </div>
-        <div id="toolsCard">
+        <div id="toolsCard" class="rectangle">
             <h2 class="section-title">Tools</h2>
             <!-- Toolsの内容をここに追加 -->
         </div>
-        <div id="relatedCards">
+        <div id="relatedCards" class="rectangle">
             <!-- その他のコンテンツ -->
         </div>
-        <div id="contributors">
+        <div id="contributors" class="rectangle">
             <!-- 作成者＆協力者セクション -->
         </div>
     </div>
@@ -52,44 +52,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById('sideMenu');
-            menu.classList.toggle('open');
-        }
-
-        // ニュースを取得して表示する
-        async function fetchNews() {
-            const apiKey = 'YOUR_API_KEY'; // 実際のAPIキーをここに入力してください
-            const url = `https://api.worldnewsapi.com/top-news?source-country=us&date=2024-08-30&apikey=${apiKey}`;
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-                displayNews(data.articles);
-            } catch (error) {
-                console.error('ニュースの取得に失敗しました:', error);
-            }
-        }
-
-        // ニュースをHTMLに追加する
-        function displayNews(articles) {
-            const newsList = document.getElementById('newsList');
-            newsList.innerHTML = ''; // 既存のニュースをクリア
-            articles.forEach(article => {
-                const listItem = document.createElement('li');
-                listItem.innerHTML = `
-                    <h3>${article.title}</h3>
-                    <p>${article.description}</p>
-                    <a href="${article.url}" target="_blank">続きを読む</a>
-                `;
-                newsList.appendChild(listItem);
-            });
-        }
-
-        // ページがロードされたときにニュースを取得する
-        window.onload = fetchNews;
-    </script>
 </body>
 </html>
-
 
