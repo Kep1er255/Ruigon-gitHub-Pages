@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ruigon-gitHub-Pages</title>
-     <link rel="stylesheet" href="https://Ruigon.github.io/Ruigon-gitHub-Pages/stylesheet.css">
+  <link rel="stylesheet" href="https://Ruigon.github.io/Ruigon-gitHub-Pages/stylesheet.css">
 </head>
 <body>
     <div class="container">
@@ -15,6 +15,13 @@
         <div id="weatherCard">
             <h2 class="section-title">東京の天気予報</h2>
             <canvas id="weatherChart"></canvas>
+        </div>
+        <div id="stocksCard">
+            <h2 class="section-title">株価</h2>
+            <canvas id="stockChart"></canvas> <!-- グラフを表示するためのキャンバス -->
+            <ul id="stocksList">
+                <!-- 株価項目がここに追加されます -->
+            </ul>
         </div>
         <div id="newsCard">
             <h2 class="section-title">最新ニュース</h2>
@@ -61,24 +68,15 @@
                 </div>
             </div>
         </div>
-        
-        <!-- 株価 Section -->
-        <div id="stocksCard">
-            <h2 class="section-title">株価</h2>
-            <canvas id="stockChart"></canvas> <!-- グラフを表示するためのキャンバス -->
-            <ul id="stocksList">
-                <!-- 株価項目がここに追加されます -->
-            </ul>
-        </div>
     </div>
 
     <div id="sideMenu">
         <span class="menu-close" onclick="toggleMenu()">×</span>
         <a href="#weatherCard">東京の天気予報</a>
+        <a href="#stocksCard">株価</a>
         <a href="#newsCard">最新ニュース</a>
         <a href="#toolsCard">Tools</a>
         <a href="#contributors">作成者＆協力者</a>
-        <a href="#stocksCard">株価</a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -91,3 +89,4 @@
     </script>
 </body>
 </html>
+
