@@ -12,32 +12,61 @@
             <span class="menu-icon" onclick="toggleMenu()">☰</span>
             <h1>Ruigon gitHub Pages</h1>
         </div>
-        <div id="weatherCard" class="rectangle">
+        <div id="weatherCard">
             <h2 class="section-title">東京の天気予報</h2>
             <canvas id="weatherChart"></canvas>
         </div>
-        <div id="stocksCard" class="rectangle">
+        <div id="stocksCard">
             <h2 class="section-title">株価</h2>
             <canvas id="stockChart"></canvas> <!-- グラフを表示するためのキャンバス -->
             <ul id="stocksList">
                 <!-- 株価項目がここに追加されます -->
             </ul>
         </div>
-        <div id="newsCard" class="rectangle">
+        <div id="newsCard">
             <h2 class="section-title">最新ニュース</h2>
             <ul id="newsList">
                 <!-- ニュース項目がここに追加されます -->
             </ul>
         </div>
-        <div id="toolsCard" class="rectangle">
+        <div id="toolsCard">
             <h2 class="section-title">Tools</h2>
             <!-- Toolsの内容をここに追加 -->
         </div>
-        <div id="relatedCards" class="rectangle">
-            <!-- その他のコンテンツ -->
+        <div id="relatedCards">
+            <div class="rectangle" onclick="window.location.href='https://ruigon.github.io/calculator/';">
+                <h3 class="rectangle-title">calculator</h3>
+                <p class="rectangle-description">この電卓は、複数の数値を入力し、平均値と中央値を計算します。入力フィールドは3x3のグリッドで整理され、簡単に操作できます。</p>
+                <p class="rectangle-date">日付: 2024-08-29</p>
+            </div>
+            <div class="rectangle" onclick="window.location.href='https://example.com/page2';">
+                <h3 class="rectangle-title">タイトル名 2</h3>
+                <p class="rectangle-description">別の説明がここに入ります。説明がここに入ります。説明がここに入ります。</p>
+                <p class="rectangle-date">日付: 2024-08-30</p>
+            </div>
         </div>
-        <div id="contributors" class="rectangle">
-            <!-- 作成者＆協力者セクション -->
+        <div id="contributors">
+            <h2 class="section-title">作成者＆協力者</h2>
+            <div class="contributor">
+                <img src="example.png" alt="協力者1" class="contributor-img" onclick="window.open('https://twitter.com/contributor1', '_blank');">
+                <div class="contributor-info">
+                    <p class="contributor-name">Ruigon(作成者)</p>
+                    <p class="contributor-sns">
+                        <a href="https://x.com/Ruigon_" target="_blank">Twitter</a> |
+                        <a href="https://github.com/Ruigon" target="_blank">GitHub</a>
+                    </p>
+                </div>
+            </div>
+            <div class="contributor">
+                <img src="aru.jfif" alt="協力者2" class="contributor-img" onclick="window.open('https://twitter.com/contributor2', '_blank');">
+                <div class="contributor-info">
+                    <p class="contributor-name">Ayane</p>
+                    <p class="contributor-sns">
+                        <a href="https://x.com/ayane_O7z" target="_blank">Twitter</a> |
+                        <a href="https://github.com/ayane-o7" target="_blank">GitHub</a>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -52,6 +81,13 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('sideMenu');
+            menu.classList.toggle('open');
+        }
+    </script>
 </body>
 </html>
+
 
