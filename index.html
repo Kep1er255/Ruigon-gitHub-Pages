@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ruigon-gitHub-Pages</title>
-  <link rel="stylesheet" href="https://Ruigon.github.io/Ruigon-gitHub-Pages/stylesheet.css">
+    <link rel="stylesheet" href="https://Ruigon.github.io/Ruigon-gitHub-Pages/stylesheet.css">
 </head>
 <body>
     <div class="container">
@@ -34,39 +34,10 @@
             <!-- Toolsの内容をここに追加 -->
         </div>
         <div id="relatedCards">
-            <div class="rectangle" onclick="window.location.href='https://ruigon.github.io/calculator/';">
-                <h3 class="rectangle-title">calculator</h3>
-                <p class="rectangle-description">この電卓は、複数の数値を入力し、平均値と中央値を計算します。入力フィールドは3x3のグリッドで整理され、簡単に操作できます。</p>
-                <p class="rectangle-date">日付: 2024-08-29</p>
-            </div>
-            <div class="rectangle" onclick="window.location.href='https://example.com/page2';">
-                <h3 class="rectangle-title">タイトル名 2</h3>
-                <p class="rectangle-description">別の説明がここに入ります。説明がここに入ります。説明がここに入ります。</p>
-                <p class="rectangle-date">日付: 2024-08-30</p>
-            </div>
+            <!-- その他のコンテンツ -->
         </div>
         <div id="contributors">
-            <h2 class="section-title">作成者＆協力者</h2>
-            <div class="contributor">
-                <img src="example.png" alt="協力者1" class="contributor-img" onclick="window.open('https://twitter.com/contributor1', '_blank');">
-                <div class="contributor-info">
-                    <p class="contributor-name">Ruigon(作成者)</p>
-                    <p class="contributor-sns">
-                        <a href="https://x.com/Ruigon_" target="_blank">Twitter</a> |
-                        <a href="https://github.com/Ruigon" target="_blank">GitHub</a>
-                    </p>
-                </div>
-            </div>
-            <div class="contributor">
-                <img src="aru.jfif" alt="協力者2" class="contributor-img" onclick="window.open('https://twitter.com/contributor2', '_blank');">
-                <div class="contributor-info">
-                    <p class="contributor-name">Ayane</p>
-                    <p class="contributor-sns">
-                        <a href="https://x.com/ayane_O7z" target="_blank">Twitter</a> |
-                        <a href="https://github.com/ayane-o7" target="_blank">GitHub</a>
-                    </p>
-                </div>
-            </div>
+            <!-- 作成者＆協力者セクション -->
         </div>
     </div>
 
@@ -86,7 +57,39 @@
             const menu = document.getElementById('sideMenu');
             menu.classList.toggle('open');
         }
+
+        // ニュースを取得して表示する
+        async function fetchNews() {
+            const apiKey = 'YOUR_API_KEY'; // 実際のAPIキーをここに入力してください
+            const url = `https://api.worldnewsapi.com/top-news?source-country=us&date=2024-08-30&apikey=${apiKey}`;
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                displayNews(data.articles);
+            } catch (error) {
+                console.error('ニュースの取得に失敗しました:', error);
+            }
+        }
+
+        // ニュースをHTMLに追加する
+        function displayNews(articles) {
+            const newsList = document.getElementById('newsList');
+            newsList.innerHTML = ''; // 既存のニュースをクリア
+            articles.forEach(article => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <h3>${article.title}</h3>
+                    <p>${article.description}</p>
+                    <a href="${article.url}" target="_blank">続きを読む</a>
+                `;
+                newsList.appendChild(listItem);
+            });
+        }
+
+        // ページがロードされたときにニュースを取得する
+        window.onload = fetchNews;
     </script>
 </body>
 </html>
+
 
