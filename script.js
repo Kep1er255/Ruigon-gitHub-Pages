@@ -6,21 +6,23 @@ const newsUrl = `https://newsdata.io/api/1/latest?apikey=${newsApiKey}&q=joe%20b
 const weatherApiKey = 'd5d3fdcd5ab1c58049c54abd5d5038a2';
 const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=35.682839&longitude=139.759455&hourly=temperature_2m&timezone=Asia%2FTokyo`;
 
+// 株価APIキーとURL
+const stockApiKey = 'h4p6gCFDsDOVVIoG5kmL5sOai7x8UcSV';
+const stockUrl = `https://api.stockapi.net/api/v1/stocks?apikey=${stockApiKey}`;
+
 // ニュースを取得して表示する関数
 async function fetchNews() {
     try {
         const response = await fetch(newsUrl);
         const data = await response.json();
         
-        console.log('News API Response:', data); // レスポンスをコンソールに出力
-        
-        if (data.results) { // 'results' はニュースデータのプロパティ名
+        if (data.results) {
             const newsList = document.getElementById('newsList');
             newsList.innerHTML = ''; // 現在のリストをクリア
             
             data.results.forEach(article => {
                 const li = document.createElement('li');
-                li.innerHTML = `<a href="${article.url}" target="_blank">${article.title}</a>`;
+                li.innerHTML = `<a href="${article.link}" target="_blank">${article.title}</a>`;
                 newsList.appendChild(li);
             });
         } else {
@@ -36,8 +38,6 @@ async function fetchWeather() {
     try {
         const response = await fetch(weatherUrl);
         const data = await response.json();
-        
-        console.log('Weather API Response:', data); // レスポンスをコンソールに出力
         
         const temperatures = data.hourly.temperature_2m;
         const labels = temperatures.map((_, index) => index + '時');
@@ -72,9 +72,32 @@ async function fetchWeather() {
     }
 }
 
+// 株価を取得して表示する関数
+async function fetchStocks() {
+    try {
+        const response = await fetch(stockUrl);
+        const data = await response.json();
+        
+        if (data.stocks) {
+            const stocksList = document.getElementById('stocksList');
+            stocksList.innerHTML = ''; // 現在のリストをクリア
+            
+            data.stocks.forEach(stock => {
+                const li = document.createElement('li');
+                li.innerHTML = `${stock.name}: ${stock.price}円`;
+                stocksList.appendChild(li);
+            });
+        } else {
+            console.error('株価データが取得できませんでした。');
+        }
+    } catch (error) {
+        console.error('株価取得中にエラーが発生しました:', error);
+    }
+}
+
 // ページがロードされた時にデータを取得
 document.addEventListener('DOMContentLoaded', () => {
     fetchNews();
     fetchWeather();
+    fetchStocks();
 });
-
