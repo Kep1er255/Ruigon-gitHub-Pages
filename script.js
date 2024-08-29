@@ -87,6 +87,7 @@ async function fetchStockConditions() {
             const stockConditionsList = document.getElementById('stocksList');
             stockConditionsList.innerHTML = ''; // 現在のリストをクリア
 
+            // データの形式に合わせて修正が必要です。ここでは仮のデータ処理例を示します。
             const timestamps = data.results.map(condition => condition.timestamp); // 仮のタイムスタンプ
             const values = data.results.map(condition => condition.value); // 仮の値
 
