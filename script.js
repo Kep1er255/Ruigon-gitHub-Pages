@@ -1,7 +1,6 @@
-
 // ニュースAPIキーとURL
-const newsApiKey = 'pub_52029e67944ed57d05729b9424dc003476213 &q=joe%20biden&country=us&domainurl=news.google.com';
-const newsUrl = `https://newsdata.io/api/1/latest?apikey= `;
+const newsApiKey = 'pub_52029e67944ed57d05729b9424dc003476213';
+const newsUrl = `https://newsdata.io/api/1/latest?apikey=${newsApiKey}&q=joe%20biden&country=us&domainurl=news.google.com`;
 
 // 天気APIキーとURL（東京の天気）
 const weatherApiKey = 'd5d3fdcd5ab1c58049c54abd5d5038a2';
@@ -13,13 +12,13 @@ async function fetchNews() {
         const response = await fetch(newsUrl);
         const data = await response.json();
         
-        console.log(data); // レスポンスをコンソールに出力
+        console.log('News API Response:', data); // レスポンスをコンソールに出力
         
-        if (data.articles) {
+        if (data.results) { // 'results' はニュースデータのプロパティ名
             const newsList = document.getElementById('newsList');
             newsList.innerHTML = ''; // 現在のリストをクリア
             
-            data.articles.forEach(article => {
+            data.results.forEach(article => {
                 const li = document.createElement('li');
                 li.innerHTML = `<a href="${article.url}" target="_blank">${article.title}</a>`;
                 newsList.appendChild(li);
@@ -38,7 +37,7 @@ async function fetchWeather() {
         const response = await fetch(weatherUrl);
         const data = await response.json();
         
-        console.log(data); // レスポンスをコンソールに出力
+        console.log('Weather API Response:', data); // レスポンスをコンソールに出力
         
         const temperatures = data.hourly.temperature_2m;
         const labels = temperatures.map((_, index) => index + '時');
