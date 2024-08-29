@@ -1,6 +1,6 @@
-// ニュースAPIキーとURL（日本のニュース）
-const newsApiKey = '440f439297b7463f9411a7ef46cf4cd4';
-const newsUrl = `https://newsdata.io/api/1/latest?apikey=${newsApiKey}&country=jp`; // 日本のニュースを取得するURL
+// ニュースAPIキーとURL（政治ニュース）
+const newsApiKey = 'pub_52029e67944ed57d05729b9424dc003476213';
+const newsUrl = `https://newsdata.io/api/1/latest?apikey=${newsApiKey}&category=politics&country=bd`; // 政治ニュースを取得するURL
 
 // 天気APIキーとURL（東京の天気）
 const weatherApiKey = 'd5d3fdcd5ab1c58049c54abd5d5038a2';
@@ -127,3 +127,4 @@ window.onload = () => {
     fetchWeather();
     fetchStockConditions();
 };
+
