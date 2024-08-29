@@ -8,7 +8,8 @@ const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=35.682839&lo
 
 // 株価APIキーとURL
 const stockApiKey = 'h4p6gCFDsDOVVIoG5kmL5sOai7x8UcSV';
-const stockUrl = `https://api.stockapi.net/api/v1/stocks?apikey=${stockApiKey}`;
+const stockId = '12bcb638-ac88-44f9-bbba-5eaf9c4033e0';
+const stockUrl = `https://api.stockapi.net/api/v1/stocks?apikey=${stockApiKey}&id=${stockId}`;
 
 // ニュースを取得して表示する関数
 async function fetchNews() {
@@ -101,3 +102,4 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchWeather();
     fetchStocks();
 });
+
