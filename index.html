@@ -9,12 +9,11 @@
 <body>
     <div class="container">
         <div class="header">
-            <span class="menu-icon" onclick="toggleMenu()">☰</span>
             <h1>Rui-Site</h1>
         </div>
         <div id="weatherCard">
             <h2 class="section-title">東京の天気予報</h2>
-            <canvas id="weatherChart" width="600" height="400"></canvas>
+            <canvas id="weatherChart" width="400" height="300"></canvas>
         </div>
         <div id="newsCard">
             <h2 class="section-title">最新ニュース</h2>
@@ -64,22 +63,9 @@
         </div>
     </div>
 
-    <div id="sideMenu">
-        <span class="menu-close" onclick="toggleMenu()">×</span>
-        <a href="#weatherCard">東京の天気予報</a>
-        <a href="#newsCard">最新ニュース</a>
-        <a href="#toolsCard">Tools</a>
-        <a href="#contributors">作成者＆協力者</a>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById('sideMenu');
-            menu.classList.toggle('open');
-        }
-    </script>
 </body>
 </html>
+
 
