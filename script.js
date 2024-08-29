@@ -1,5 +1,5 @@
 // ニュースAPIキーとURL（日本のニュース）
-const newsApiKey = 'pub_52029e67944ed57d05729b9424dc003476213';
+const newsApiKey = '440f439297b7463f9411a7ef46cf4cd4';
 const newsUrl = `https://newsdata.io/api/1/latest?apikey=${newsApiKey}&country=jp`; // 日本のニュースを取得するURL
 
 // 天気APIキーとURL（東京の天気）
@@ -127,4 +127,3 @@ window.onload = () => {
     fetchWeather();
     fetchStockConditions();
 };
-
