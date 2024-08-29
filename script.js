@@ -1,130 +1,125 @@
-// ニュースAPIキーとURL（日本の政治ニュース）
-const newsApiKey = '440f439297b7463f9411a7ef46cf4cd4';
-const newsUrl = `https://newsdata.io/api/1/latest?apikey=${newsApiKey}&category=politics&country=jp`; // 日本の政治ニュースを取得するURL
+// メニューの表示/非表示を切り替える関数
+function toggleMenu() {
+    const menu = document.getElementById('sideMenu');
+    menu.classList.toggle('open');
+}
 
-// 天気APIキーとURL（東京の天気）
-const weatherApiKey = 'd5d3fdcd5ab1c58049c54abd5d5038a2';
-const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=35.682839&longitude=139.759455&hourly=temperature_2m&timezone=Asia%2FTokyo`;
-
-// 株価APIのURL
-const stockApiUrl = 'https://api.polygon.io/v3/reference/conditions?asset_class=stocks&limit=10&apiKey=h4p6gCFDsDOVVIoG5kmL5sOai7x8UcSV';
-
-// ニュースを取得して表示する関数
+// ニュースを取得して表示する
 async function fetchNews() {
+    const apiKey = 'YOUR_API_KEY'; // 実際のAPIキーをここに入力してください
+    const url = `https://api.worldnewsapi.com/top-news?source-country=us&date=2024-08-30&apikey=${apiKey}`;
     try {
-        const response = await fetch(newsUrl);
+        const response = await fetch(url);
         const data = await response.json();
-        
-        console.log(data); // レスポンスをコンソールに出力
-        
-        if (data && data.results) {
-            const newsList = document.getElementById('newsList');
-            newsList.innerHTML = ''; // 現在のリストをクリア
-            
-            data.results.forEach(article => {
-                const li = document.createElement('li');
-                li.innerHTML = `<a href="${article.url}" target="_blank">${article.title}</a>`;
-                newsList.appendChild(li);
-            });
-        } else {
-            console.error('ニュースデータが取得できませんでした。');
-        }
+        displayNews(data.articles);
     } catch (error) {
-        console.error('ニュース取得中にエラーが発生しました:', error);
+        console.error('ニュースの取得に失敗しました:', error);
     }
 }
 
-// 天気予報を取得して表示する関数
-async function fetchWeather() {
+// ニュースをHTMLに追加する
+function displayNews(articles) {
+    const newsList = document.getElementById('newsList');
+    newsList.innerHTML = ''; // 既存のニュースをクリア
+    articles.forEach(article => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+            <h3>${article.title}</h3>
+            <p>${article.description}</p>
+            <a href="${article.url}" target="_blank">続きを読む</a>
+        `;
+        newsList.appendChild(listItem);
+    });
+}
+
+// 株価データを取得して表示する (例)
+async function fetchStocks() {
+    const url = 'YOUR_STOCKS_API_URL'; // 株価APIのURLをここに入力してください
     try {
-        const response = await fetch(weatherUrl);
+        const response = await fetch(url);
         const data = await response.json();
-        
-        console.log(data); // レスポンスをコンソールに出力
-        
-        const temperatures = data.hourly.temperature_2m;
-        const labels = temperatures.map((_, index) => index + '時');
-        const dataSet = {
-            labels: labels,
+        displayStocks(data);
+    } catch (error) {
+        console.error('株価の取得に失敗しました:', error);
+    }
+}
+
+// 株価をHTMLに追加する
+function displayStocks(stocks) {
+    const stocksList = document.getElementById('stocksList');
+    stocksList.innerHTML = ''; // 既存の株価をクリア
+    stocks.forEach(stock => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+            <h3>${stock.name}</h3>
+            <p>現在の価格: ${stock.price}</p>
+        `;
+        stocksList.appendChild(listItem);
+    });
+}
+
+// チャートを描画する関数
+function createChart() {
+    const weatherChart = document.getElementById('weatherChart').getContext('2d');
+    const stockChart = document.getElementById('stockChart').getContext('2d');
+
+    // 天気チャートの例
+    new Chart(weatherChart, {
+        type: 'line',
+        data: {
+            labels: ['日', '月', '火', '水', '木', '金', '土'],
             datasets: [{
                 label: '気温',
-                data: temperatures,
+                data: [20, 22, 19, 24, 25, 27, 28],
                 borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderWidth: 1
+                borderWidth: 2,
+                fill: false
             }]
-        };
-
-        const ctx = document.getElementById('weatherChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: dataSet,
-            options: {
-                scales: {
-                    x: {
-                        beginAtZero: true
-                    },
-                    y: {
-                        beginAtZero: true
-                    }
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    beginAtZero: true
+                },
+                y: {
+                    beginAtZero: true
                 }
             }
-        });
-    } catch (error) {
-        console.error('天気予報取得中にエラーが発生しました:', error);
-    }
-}
-
-// 株価情報を取得して表示する関数
-async function fetchStockConditions() {
-    try {
-        const response = await fetch(stockApiUrl);
-        const data = await response.json();
-        
-        console.log(data); // コンソールにデータを表示
-
-        if (data && data.results) {
-            const stockLabels = data.results.map(item => item.symbol); // 仮のデータとしてシンボルを使用
-            const stockValues = data.results.map(item => item.close); // 仮のデータとして閉じる値を使用
-
-            const stockData = {
-                labels: stockLabels,
-                datasets: [{
-                    label: '株価',
-                    data: stockValues,
-                    borderColor: 'rgba(153, 102, 255, 1)',
-                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                    borderWidth: 1
-                }]
-            };
-
-            const ctx = document.getElementById('stockChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: stockData,
-                options: {
-                    scales: {
-                        x: {
-                            beginAtZero: true
-                        },
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        } else {
-            console.error('株価データが取得できませんでした。');
         }
-    } catch (error) {
-        console.error('株価取得中にエラーが発生しました:', error);
-    }
+    });
+
+    // 株価チャートの例
+    new Chart(stockChart, {
+        type: 'bar',
+        data: {
+            labels: ['AAPL', 'GOOGL', 'AMZN', 'MSFT'],
+            datasets: [{
+                label: '株価',
+                data: [145, 2730, 3340, 298],
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    beginAtZero: true
+                },
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 }
 
-// ページがロードされた時にデータを取得して表示
-window.onload = () => {
+// ページ読み込み時にニュースと株価データを取得する
+window.onload = function() {
     fetchNews();
-    fetchWeather();
-    fetchStockConditions();
+    fetchStocks();
+    createChart();
 };
 
