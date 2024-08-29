@@ -87,23 +87,25 @@ async function fetchStockConditions() {
             const stockConditionsList = document.getElementById('stocksList');
             stockConditionsList.innerHTML = ''; // 現在のリストをクリア
 
-            // データの形式に合わせて修正が必要です。ここでは仮のデータ処理例を示します。
-            const timestamps = data.results.map(condition => condition.timestamp); // 仮のタイムスタンプ
-            const values = data.results.map(condition => condition.value); // 仮の値
+            // データの形式に合わせて修正が必要です。ここでは仮のデータ処理を行っています。
+            const stockLabels = data.results.map(item => item.ticker);
+            const stockValues = data.results.map(item => item.close); // 仮のデータとして閉じる値を使用
+
+            const stockData = {
+                labels: stockLabels,
+                datasets: [{
+                    label: '株価',
+                    data: stockValues,
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    borderWidth: 1
+                }]
+            };
 
             const ctx = document.getElementById('stockChart').getContext('2d');
             new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: timestamps, // x 軸ラベル（時間など）
-                    datasets: [{
-                        label: '株価',
-                        data: values, // y 軸データ（株価）
-                        borderColor: 'rgba(153, 102, 255, 1)',
-                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                        borderWidth: 1
-                    }]
-                },
+                type: 'bar',
+                data: stockData,
                 options: {
                     scales: {
                         x: {
@@ -115,18 +117,17 @@ async function fetchStockConditions() {
                     }
                 }
             });
-
         } else {
-            console.error('株価条件データが取得できませんでした。');
+            console.error('株価データが取得できませんでした。');
         }
     } catch (error) {
-        console.error('株価条件取得中にエラーが発生しました:', error);
+        console.error('株価取得中にエラーが発生しました:', error);
     }
 }
 
-// ページがロードされた時にデータを取得
-document.addEventListener('DOMContentLoaded', () => {
+// ページがロードされた時にデータを取得して表示
+window.onload = () => {
     fetchNews();
     fetchWeather();
     fetchStockConditions();
-});
+};
