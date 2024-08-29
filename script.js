@@ -1,64 +1,24 @@
-// ニュースAPIキーとURL
-const newsApiKey = 'pub_52029e67944ed57d05729b9424dc003476213';
-const newsUrl = `https://newsdata.io/api/1/latest?apikey=${newsApiKey}&q=joe%20biden&country=us&domainurl=news.google.com`;
+// 天気予報のデータを取得してチャートを表示する関数
+async function fetchWeatherData() {
+    const weatherApiUrl = 'https://api.weatherapi.com/v1/forecast.json?key=YOUR_WEATHER_API_KEY&q=Tokyo&days=7';
 
-// 天気APIキーとURL（東京の天気）
-const weatherApiKey = 'd5d3fdcd5ab1c58049c54abd5d5038a2';
-const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=35.682839&longitude=139.759455&hourly=temperature_2m&timezone=Asia%2FTokyo`;
-
-// 株価APIのURL
-const stockApiUrl = 'https://api.polygon.io/v3/reference/conditions?asset_class=stocks&limit=10&apiKey=h4p6gCFDsDOVVIoG5kmL5sOai7x8UcSV';
-
-// ニュースを取得して表示する関数
-async function fetchNews() {
     try {
-        const response = await fetch(newsUrl);
+        const response = await fetch(weatherApiUrl);
         const data = await response.json();
-        
-        console.log(data); // レスポンスをコンソールに出力
-        
-        if (data.articles) {
-            const newsList = document.getElementById('newsList');
-            newsList.innerHTML = ''; // 現在のリストをクリア
-            
-            data.articles.forEach(article => {
-                const li = document.createElement('li');
-                li.innerHTML = `<a href="${article.url}" target="_blank">${article.title}</a>`;
-                newsList.appendChild(li);
-            });
-        } else {
-            console.error('ニュースデータが取得できませんでした。');
-        }
-    } catch (error) {
-        console.error('ニュース取得中にエラーが発生しました:', error);
-    }
-}
-
-// 天気予報を取得して表示する関数
-async function fetchWeather() {
-    try {
-        const response = await fetch(weatherUrl);
-        const data = await response.json();
-        
-        console.log(data); // レスポンスをコンソールに出力
-        
-        const temperatures = data.hourly.temperature_2m;
-        const labels = temperatures.map((_, index) => index + '時');
-        const dataSet = {
-            labels: labels,
-            datasets: [{
-                label: '気温',
-                data: temperatures,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderWidth: 1
-            }]
-        };
 
         const ctx = document.getElementById('weatherChart').getContext('2d');
         new Chart(ctx, {
             type: 'line',
-            data: dataSet,
+            data: {
+                labels: data.forecast.forecastday.map(day => day.date),
+                datasets: [{
+                    label: 'Temperature (°C)',
+                    data: data.forecast.forecastday.map(day => day.day.avgtemp_c),
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    fill: true
+                }]
+            },
             options: {
                 scales: {
                     x: {
@@ -71,26 +31,51 @@ async function fetchWeather() {
             }
         });
     } catch (error) {
-        console.error('天気予報取得中にエラーが発生しました:', error);
+        console.error('天気データの取得中にエラーが発生しました:', error);
     }
 }
 
-// 株価情報を取得して表示する関数
+// ニュースのデータを取得して表示する関数
+async function fetchNewsData() {
+    const newsApiUrl = 'https://newsapi.org/v2/top-headlines?country=jp&apiKey=YOUR_NEWS_API_KEY';
+
+    try {
+        const response = await fetch(newsApiUrl);
+        const data = await response.json();
+
+        const newsList = document.getElementById('newsList');
+        newsList.innerHTML = '';
+
+        data.articles.forEach(article => {
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="${article.url}" target="_blank">${article.title}</a>`;
+            newsList.appendChild(li);
+        });
+    } catch (error) {
+        console.error('ニュースデータの取得中にエラーが発生しました:', error);
+    }
+}
+
+// 株価の条件を取得して表示する関数
 async function fetchStockConditions() {
+    const stockApiUrl = `https://api.polygon.io/v3/reference/conditions?asset_class=stocks&limit=10&apiKey=cr88fbpr01qmmifq0tggcr88fbpr01qmmifq0th0`;
+
     try {
         const response = await fetch(stockApiUrl);
         const data = await response.json();
-        
-        console.log(data); // コンソールにデータを表示
 
-        const stockConditionsList = document.getElementById('stocksList');
-        stockConditionsList.innerHTML = ''; // 現在のリストをクリア
+        if (data.results) {
+            const stockConditionsList = document.getElementById('stocksList');
+            stockConditionsList.innerHTML = '';
 
-        data.results.forEach(condition => {
-            const li = document.createElement('li');
-            li.innerHTML = `Condition: ${condition.name}, Abbreviation: ${condition.abbreviation}`;
-            stockConditionsList.appendChild(li);
-        });
+            data.results.forEach(condition => {
+                const li = document.createElement('li');
+                li.innerHTML = `Condition: ${condition.name}, Abbreviation: ${condition.abbreviation}`;
+                stockConditionsList.appendChild(li);
+            });
+        } else {
+            console.error('株価データが取得できませんでした。');
+        }
     } catch (error) {
         console.error('株価条件の取得中にエラーが発生しました:', error);
     }
@@ -98,8 +83,7 @@ async function fetchStockConditions() {
 
 // ページがロードされた時にデータを取得
 document.addEventListener('DOMContentLoaded', () => {
-    fetchNews();
-    fetchWeather();
+    fetchWeatherData();
+    fetchNewsData();
     fetchStockConditions();
 });
-
