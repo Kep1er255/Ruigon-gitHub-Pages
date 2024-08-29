@@ -1,116 +1,79 @@
-const apiKeyWeather = 'd5d3fdcd5ab1c58049c54abd5d5038a2';
-const apiKeyNews = 'pub_52029e67944ed57d05729b9424dc003476213';
-const cityId = '1850147'; // 東京の都市ID
+// ニュースAPIキーとURL
+const newsApiKey = 'pub_52029e67944ed57d05729b9424dc003476213';
+const newsUrl = `https://newsapi.org/v2/top-headlines?country=jp&apiKey=${newsApiKey}`;
 
-document.addEventListener('DOMContentLoaded', () => {
-    getWeather();
-    getNews();
-});
+// 天気APIキーとURL（東京の天気）
+const weatherApiKey = 'd5d3fdcd5ab1c58049c54abd5d5038a2';
+const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=35.682839&longitude=139.759455&hourly=temperature_2m&timezone=Asia%2FTokyo`;
 
-function getWeather() {
-    const url = `https://api.openweathermap.org/data/2.5/forecast?id=${cityId}&appid=${apiKeyWeather}&units=metric&lang=ja`;
-
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Weather data:', data); // デバッグ用
-
-            const labels = [];
-            const temperatures = [];
-            
-            let currentDate = '';
-            let dailyTemps = [];
-            
-            data.list.forEach(forecast => {
-                const date = new Date(forecast.dt * 1000);
-                const day = date.toDateString();
-                
-                if (currentDate !== day) {
-                    if (currentDate !== '') {
-                        const avgTemp = dailyTemps.reduce((a, b) => a + b, 0) / dailyTemps.length;
-                        labels.push(currentDate);
-                        temperatures.push(avgTemp);
-                    }
-                    currentDate = day;
-                    dailyTemps = [];
-                }
-                
-                dailyTemps.push(forecast.main.temp);
-            });
-
-            if (dailyTemps.length > 0) {
-                const avgTemp = dailyTemps.reduce((a, b) => a + b, 0) / dailyTemps.length;
-                labels.push(currentDate);
-                temperatures.push(avgTemp);
-            }
-
-            if (temperatures.length === 0) {
-                alert('データがありません。');
-                return;
-            }
-
-            document.getElementById('weatherCard').style.display = 'block';
-
-            const ctx = document.getElementById('weatherChart').getContext('2d');
-            const existingChart = Chart.getChart(ctx); // 既存のチャートがあれば削除
-            if (existingChart) {
-                existingChart.destroy();
-            }
-
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: '1日の平均気温 (°C)',
-                        data: temperatures,
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        fill: true,
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: false,
-                            suggestedMin: Math.min(...temperatures) - 5,
-                            suggestedMax: Math.max(...temperatures) + 5,
-                        }
-                    }
-                }
-            });
-        })
-        .catch(error => console.error('Error fetching weather data:', error));
-}
-
-function getNews() {
-    const url = `https://newsdata.io/api/1/news?apikey=${apiKeyNews}&country=jp`;
-
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('News data:', data); // デバッグ用
-
+// ニュースを取得して表示する関数
+async function fetchNews() {
+    try {
+        const response = await fetch(newsUrl);
+        const data = await response.json();
+        
+        console.log(data); // レスポンスをコンソールに出力
+        
+        if (data.articles) {
             const newsList = document.getElementById('newsList');
-            newsList.innerHTML = '';
-
-            data.results.forEach((article, index) => {
-                if (index < 3) { // 最新の3件を表示
-                    const newsItem = document.createElement('li');
-                    newsItem.innerHTML = `<strong>${article.title}</strong><br>${article.description}`;
-                    newsList.appendChild(newsItem);
-                }
+            newsList.innerHTML = ''; // 現在のリストをクリア
+            
+            data.articles.forEach(article => {
+                const li = document.createElement('li');
+                li.innerHTML = `<a href="${article.url}" target="_blank">${article.title}</a>`;
+                newsList.appendChild(li);
             });
-        })
-        .catch(error => console.error('Error fetching news data:', error));
+        } else {
+            console.error('ニュースデータが取得できませんでした。');
+        }
+    } catch (error) {
+        console.error('ニュース取得中にエラーが発生しました:', error);
+    }
 }
+
+// 天気予報を取得して表示する関数
+async function fetchWeather() {
+    try {
+        const response = await fetch(weatherUrl);
+        const data = await response.json();
+        
+        console.log(data); // レスポンスをコンソールに出力
+        
+        const temperatures = data.hourly.temperature_2m;
+        const labels = temperatures.map((_, index) => index + '時');
+        const dataSet = {
+            labels: labels,
+            datasets: [{
+                label: '気温',
+                data: temperatures,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderWidth: 1
+            }]
+        };
+
+        const ctx = document.getElementById('weatherChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: dataSet,
+            options: {
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    } catch (error) {
+        console.error('天気予報取得中にエラーが発生しました:', error);
+    }
+}
+
+// ページがロードされた時にデータを取得
+document.addEventListener('DOMContentLoaded', () => {
+    fetchNews();
+    fetchWeather();
+});
