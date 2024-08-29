@@ -84,11 +84,7 @@ async function fetchStockConditions() {
         console.log(data); // コンソールにデータを表示
 
         if (data && data.results) {
-            const stockConditionsList = document.getElementById('stocksList');
-            stockConditionsList.innerHTML = ''; // 現在のリストをクリア
-
-            // データの形式に合わせて修正が必要です。ここでは仮のデータ処理を行っています。
-            const stockLabels = data.results.map(item => item.ticker);
+            const stockLabels = data.results.map(item => item.symbol); // 仮のデータとしてシンボルを使用
             const stockValues = data.results.map(item => item.close); // 仮のデータとして閉じる値を使用
 
             const stockData = {
@@ -104,7 +100,7 @@ async function fetchStockConditions() {
 
             const ctx = document.getElementById('stockChart').getContext('2d');
             new Chart(ctx, {
-                type: 'bar',
+                type: 'line',
                 data: stockData,
                 options: {
                     scales: {
@@ -131,4 +127,3 @@ window.onload = () => {
     fetchWeather();
     fetchStockConditions();
 };
-
