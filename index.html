@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rui-Site</title>
+  <link rel="stylesheet" href="https://Ruigon.github.io/Ruigon-gitHub-Pages/stylesheet.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <span class="menu-icon" onclick="toggleMenu()">☰</span>
+            <h1>Rui-Site</h1>
+        </div>
+        <div id="weatherCard">
+            <h2 class="section-title">東京の天気予報</h2>
+            <canvas id="weatherChart"></canvas>
+        </div>
+        <div id="newsCard">
+            <h2 class="section-title">最新ニュース</h2>
+            <ul id="newsList">
+                <!-- ニュース項目がここに追加されます -->
+            </ul>
+        </div>
+        <div id="toolsCard">
+            <h2 class="section-title">Tools</h2>
+            <!-- Toolsの内容をここに追加 -->
+        </div>
+        <div id="relatedCards">
+            <div class="rectangle" onclick="window.location.href='https://example.com/page1';">
+                <h3 class="rectangle-title">タイトル名 1</h3>
+                <p class="rectangle-description">説明がここに入ります。説明がここに入ります。説明がここに入ります。</p>
+                <p class="rectangle-date">日付: 2024-08-29</p>
+            </div>
+            <div class="rectangle" onclick="window.location.href='https://example.com/page2';">
+                <h3 class="rectangle-title">タイトル名 2</h3>
+                <p class="rectangle-description">別の説明がここに入ります。説明がここに入ります。説明がここに入ります。</p>
+                <p class="rectangle-date">日付: 2024-08-30</p>
+            </div>
+        </div>
+        <div id="contributors">
+            <h2 class="section-title">協力者</h2>
+            <div class="contributor">
+                <img src="images/contributor1.jpg" alt="協力者1" class="contributor-img" onclick="window.open('https://twitter.com/contributor1', '_blank');">
+                <div class="contributor-info">
+                    <p class="contributor-name">協力者1</p>
+                    <p class="contributor-sns">
+                        <a href="https://twitter.com/contributor1" target="_blank">Twitter</a> |
+                        <a href="https://github.com/contributor1" target="_blank">GitHub</a>
+                    </p>
+                </div>
+            </div>
+            <div class="contributor">
+                <img src="images/contributor2.jpg" alt="協力者2" class="contributor-img" onclick="window.open('https://twitter.com/contributor2', '_blank');">
+                <div class="contributor-info">
+                    <p class="contributor-name">協力者2</p>
+                    <p class="contributor-sns">
+                        <a href="https://twitter.com/contributor2" target="_blank">Twitter</a> |
+                        <a href="https://github.com/contributor2" target="_blank">GitHub</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="sideMenu">
+        <span class="menu-close" onclick="toggleMenu()">×</span>
+        <a href="#weatherCard">東京の天気予報</a>
+        <a href="#newsCard">最新ニュース</a>
+        <a href="#toolsCard">Tools</a>
+        <a href="#contributors">協力者</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('sideMenu');
+            menu.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
