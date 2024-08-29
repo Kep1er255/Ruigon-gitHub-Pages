@@ -7,9 +7,12 @@ function toggleMenu() {
 // ニュースを取得して表示する
 async function fetchNews() {
     const apiKey = '1ea6cb85d8e4996c79c2702af1335e72';
-      const url = `https://api.worldnewsapi.com/top-news?source-country=us&date=2024-08-30&apikey=${apiKey}`;
+    const url = `https://api.worldnewsapi.com/top-news?source-country=us&date=2024-08-30&apikey=${apiKey}`;
     try {
         const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('ネットワークエラー');
+        }
         const data = await response.json();
         displayNews(data.articles);
     } catch (error) {
@@ -34,11 +37,15 @@ function displayNews(articles) {
 
 // 株価データを取得して表示する (例)
 async function fetchStocks() {
-    const url = 'h4p6gCFDsDOVVIoG5kmL5sOai7x8UcSV';
+    const apiKey = 'h4p6gCFDsDOVVIoG5kmL5sOai7x8UcSV'; // ここに実際のAPIキーを設定
+    const url = `https://api.example.com/stocks?apikey=${apiKey}`; // 実際のAPI URLに置き換えてください
     try {
         const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('ネットワークエラー');
+        }
         const data = await response.json();
-        displayStocks(data);
+        displayStocks(data.stocks); // 実際のデータ構造に合わせて変更
     } catch (error) {
         console.error('株価の取得に失敗しました:', error);
     }
@@ -122,4 +129,5 @@ window.onload = function() {
     fetchStocks();
     createChart();
 };
+
 
