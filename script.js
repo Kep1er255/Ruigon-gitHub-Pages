@@ -83,16 +83,43 @@ async function fetchStockConditions() {
         
         console.log(data); // コンソールにデータを表示
 
-        const stockConditionsList = document.getElementById('stocksList');
-        stockConditionsList.innerHTML = ''; // 現在のリストをクリア
+        if (data && data.results) {
+            const stockConditionsList = document.getElementById('stocksList');
+            stockConditionsList.innerHTML = ''; // 現在のリストをクリア
 
-        data.results.forEach(condition => {
-            const li = document.createElement('li');
-            li.innerHTML = `Condition: ${condition.name}, Abbreviation: ${condition.abbreviation}`;
-            stockConditionsList.appendChild(li);
-        });
+            const timestamps = data.results.map(condition => condition.timestamp); // 仮のタイムスタンプ
+            const values = data.results.map(condition => condition.value); // 仮の値
+
+            const ctx = document.getElementById('stockChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: timestamps, // x 軸ラベル（時間など）
+                    datasets: [{
+                        label: '株価',
+                        data: values, // y 軸データ（株価）
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        },
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+        } else {
+            console.error('株価条件データが取得できませんでした。');
+        }
     } catch (error) {
-        console.error('株価条件の取得中にエラーが発生しました:', error);
+        console.error('株価条件取得中にエラーが発生しました:', error);
     }
 }
 
