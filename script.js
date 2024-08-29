@@ -1,3 +1,4 @@
+
 // ニュースAPIキーとURL
 const newsApiKey = 'pub_52029e67944ed57d05729b9424dc003476213';
 const newsUrl = `https://newsapi.org/v2/top-headlines?country=jp&apiKey=${newsApiKey}`;
@@ -77,3 +78,4 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchNews();
     fetchWeather();
 });
+
