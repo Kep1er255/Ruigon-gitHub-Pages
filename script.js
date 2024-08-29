@@ -1,6 +1,6 @@
 
 // ニュースAPIキーとURL
-const newsApiKey = 'pub_52029e67944ed57d05729b9424dc003476213';
+const newsApiKey = '440f439297b7463f9411a7ef46cf4cd4';
 const newsUrl = `https://newsapi.org/v2/top-headlines?country=jp&apiKey=${newsApiKey}`;
 
 // 天気APIキーとURL（東京の天気）
