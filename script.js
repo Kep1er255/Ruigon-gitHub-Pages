@@ -45,6 +45,7 @@ function fetchNewsData() {
         .then(response => response.json())
         .then(data => {
             const newsList = document.getElementById('newsList');
+            newsList.innerHTML = ''; // Clear previous news
             data.results.forEach(article => {
                 const listItem = document.createElement('li');
                 listItem.innerHTML = `<a href="${article.url}" target="_blank">${article.title}</a>`;
@@ -58,3 +59,4 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchWeatherData();
     fetchNewsData();
 });
+
