@@ -62,7 +62,7 @@ body {
     margin: 5px auto 0;
 }
 
-#weatherCard, #newsCard, #toolsCard, #stocksCard {
+#weatherCard, #stocksCard, #newsCard, #toolsCard {
     margin-top: 20px;
 }
 
@@ -176,11 +176,20 @@ body {
     transform: translateX(0);
 }
 
+.menu-close {
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    text-align: right;
+    margin-bottom: 20px;
+}
+
 #sideMenu a {
+    display: block;
     color: white;
     text-decoration: none;
-    display: block;
-    margin: 15px 0;
+    margin: 10px 0;
     font-size: 18px;
 }
 
@@ -188,18 +197,17 @@ body {
     text-decoration: underline;
 }
 
-.menu-close {
-    font-size: 30px;
-    color: #fff;
-    cursor: pointer;
-    position: absolute;
-    top: 20px;
-    right: 20px; /* 左から右に変更 */
-}
-
-/* Canvas Style */
-#weatherChart {
-    max-width: 100%;
+#weatherChart, #stockChart {
+    width: 100%;
     height: 300px;
 }
 
+#stocksList, #newsList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#stocksList li, #newsList li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
