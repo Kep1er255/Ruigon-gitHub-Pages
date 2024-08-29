@@ -1,8 +1,3 @@
-// 新しい株価APIキー
-const stockApiKey = 'cr88f7hr01qmmifq0tdgcr88f7hr01qmmifq0te0';
-// 新しい株価APIのURL（ここでは例としてAPIのURLをそのまま使用しています。実際のURLはAPIのドキュメントを参照してください）
-const stockApiUrl = `https://api.polygon.io/v3/reference/conditions?asset_class=stocks&limit=10&apiKey=${stockApiKey}`;
-
 // ニュースAPIキーとURL
 const newsApiKey = 'pub_52029e67944ed57d05729b9424dc003476213';
 const newsUrl = `https://newsdata.io/api/1/latest?apikey=${newsApiKey}&q=joe%20biden&country=us&domainurl=news.google.com`;
@@ -10,6 +5,9 @@ const newsUrl = `https://newsdata.io/api/1/latest?apikey=${newsApiKey}&q=joe%20b
 // 天気APIキーとURL（東京の天気）
 const weatherApiKey = 'd5d3fdcd5ab1c58049c54abd5d5038a2';
 const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=35.682839&longitude=139.759455&hourly=temperature_2m&timezone=Asia%2FTokyo`;
+
+// 株価APIのURL
+const stockApiUrl = 'https://api.polygon.io/v3/reference/conditions?asset_class=stocks&limit=10&apiKey=h4p6gCFDsDOVVIoG5kmL5sOai7x8UcSV';
 
 // ニュースを取得して表示する関数
 async function fetchNews() {
@@ -19,11 +17,11 @@ async function fetchNews() {
         
         console.log(data); // レスポンスをコンソールに出力
         
-        if (data.articles) {
+        if (data && data.results) {
             const newsList = document.getElementById('newsList');
             newsList.innerHTML = ''; // 現在のリストをクリア
             
-            data.articles.forEach(article => {
+            data.results.forEach(article => {
                 const li = document.createElement('li');
                 li.innerHTML = `<a href="${article.url}" target="_blank">${article.title}</a>`;
                 newsList.appendChild(li);
@@ -104,4 +102,3 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchWeather();
     fetchStockConditions();
 });
-
