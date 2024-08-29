@@ -7,17 +7,55 @@ function toggleMenu() {
 // ニュースを取得して表示する
 async function fetchNews() {
     const apiKey = '1ea6cb85d8e4996c79c2702af1335e72';
-    const url = `https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=us&max=10&apikey=1ea6cb85d8e4996c79c2702af1335e72`;
+    const url = `https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=us&max=10&apikey=${apiKey}`;
     try {
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error('ネットワークエラー');
         }
         const data = await response.json();
-        displayNews(data.articles);
+        // ニュースを日本語に翻訳して表示
+        const translatedArticles = await translateArticles(data.articles);
+        displayNews(translatedArticles);
     } catch (error) {
         console.error('ニュースの取得に失敗しました:', error);
     }
+}
+
+// ニュースのタイトルと説明を日本語に翻訳する
+async function translateArticles(articles) {
+    const translateUrl = 'https://api.example.com/translate'; // 翻訳APIのURL
+    const apiKey = 'your-translate-api-key'; // 翻訳APIキー
+
+    const translatedArticles = await Promise.all(articles.map(async article => {
+        try {
+            const response = await fetch(translateUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`
+                },
+                body: JSON.stringify({
+                    text: article.title + '\n' + article.description,
+                    targetLang: 'ja' // 翻訳先の言語
+                })
+            });
+            if (!response.ok) {
+                throw new Error('翻訳エラー');
+            }
+            const translation = await response.json();
+            const [title, description] = translation.text.split('\n');
+            return {
+                ...article,
+                title,
+                description
+            };
+        } catch (error) {
+            console.error('翻訳に失敗しました:', error);
+            return article; // 翻訳に失敗した場合は元の記事を返す
+        }
+    }));
+    return translatedArticles;
 }
 
 // ニュースをHTMLに追加する
@@ -129,5 +167,3 @@ window.onload = function() {
     fetchStocks();
     createChart();
 };
-
-
