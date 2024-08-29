@@ -131,3 +131,4 @@ window.onload = () => {
     fetchWeather();
     fetchStockConditions();
 };
+
