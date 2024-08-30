@@ -169,25 +169,34 @@ body {
     transition: left 0.3s;
     overflow-y: auto;
     padding-top: 60px;
+    z-index: 1000;
 }
 
 #sideMenu a {
     display: block;
-    padding: 15px;
+    padding: 10px 20px;
     color: #333;
     text-decoration: none;
     border-bottom: 1px solid #ddd;
 }
 
 #sideMenu a:hover {
-    background-color: #f1f1f1;
+    background-color: #f4f4f4;
 }
 
 .menu-close {
-    font-size: 30px;
-    color: #333;
-    cursor: pointer;
     position: absolute;
     top: 10px;
-    right: 20px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
 }
