@@ -1,3 +1,11 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* スライドメニューのために横スクロールを無効に */
+}
+
 .container {
     width: 80%;
     margin: 0 auto;
