@@ -166,4 +166,34 @@ window.onload = function() {
     fetchNews();
     fetchStocks();
     createChart();
+    setupGame(); // ゲームの初期化
 };
+
+// ゲームの初期設定
+function setupGame() {
+    const gameCanvas = document.getElementById('gameCanvas');
+    const startGameBtn = document.getElementById('startGameBtn');
+    const gameStatus = document.getElementById('gameStatus');
+
+    // ゲームの初期設定
+    const gameContext = gameCanvas.getContext('2d');
+    let gameRunning = false;
+
+    // ゲーム開始ボタンのイベントリスナー
+    startGameBtn.addEventListener('click', () => {
+        if (!gameRunning) {
+            gameRunning = true;
+            gameStatus.textContent = 'ゲームがスタートしました！';
+            startGame();
+        }
+    });
+
+    // ゲームロジックのスタート
+    function startGame() {
+        // ゲームのロジックをここに追加
+        gameContext.fillStyle = 'black';
+        gameContext.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
+
+        // ここでゲームの描画やロジックを追加
+    }
+}
