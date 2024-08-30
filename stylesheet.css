@@ -168,19 +168,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     transition: left 0.3s;
     overflow-y: auto;
-    z-index: 1000;
-}
-
-#sideMenu.open {
-    left: 0;
-}
-
-.menu-close {
-    display: block;
-    text-align: right;
-    font-size: 30px;
-    padding: 10px;
-    cursor: pointer;
+    padding-top: 60px;
 }
 
 #sideMenu a {
@@ -192,6 +180,15 @@ body {
 }
 
 #sideMenu a:hover {
-    background-color: #f9f9f9;
+    background-color: #f1f1f1;
+}
+
+.menu-close {
+    font-size: 30px;
+    color: #333;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 20px;
 }
 
