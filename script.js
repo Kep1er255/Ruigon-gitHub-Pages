@@ -7,7 +7,7 @@ function toggleMenu() {
 // ニュースを取得して表示する
 async function fetchNews() {
     const apiKey = '7801f74e6f980312dc085440b437b956';
-    const url = `https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=us&max=10&apikey=7801f74e6f980312dc085440b437b956`;
+    const url = `https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=us&max=10&apikey=${apiKey}`;
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -167,13 +167,3 @@ window.onload = function() {
     fetchStocks();
     createChart();
 };
-
-//ページを開く役割をする
- function toggleMenu() {
-            const menu = document.getElementById('sideMenu');
-            if (menu.style.left === '0px') {
-                menu.style.left = '-250px';
-            } else {
-                menu.style.left = '0px';
-            }
-        }
