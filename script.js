@@ -7,7 +7,7 @@ function toggleMenu() {
 // ニュースを取得して表示する
 async function fetchNews() {
     const apiKey = '1ea6cb85d8e4996c79c2702af1335e72';
-    const url = `https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=us&max=10&apikey=${apiKey}`;
+    const url = https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=us&max=10&apikey=${apiKey};
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -33,7 +33,7 @@ async function translateArticles(articles) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${apiKey}`
+                    'Authorization': Bearer ${apiKey}
                 },
                 body: JSON.stringify({
                     text: article.title + '\n' + article.description,
@@ -64,11 +64,11 @@ function displayNews(articles) {
     newsList.innerHTML = ''; // 既存のニュースをクリア
     articles.forEach(article => {
         const listItem = document.createElement('li');
-        listItem.innerHTML = `
+        listItem.innerHTML = 
             <h3>${article.title}</h3>
             <p>${article.description}</p>
             <a href="${article.url}" target="_blank">続きを読む</a>
-        `;
+        ;
         newsList.appendChild(listItem);
     });
 }
@@ -76,7 +76,7 @@ function displayNews(articles) {
 // 株価データを取得して表示する (例)
 async function fetchStocks() {
     const apiKey = 'h4p6gCFDsDOVVIoG5kmL5sOai7x8UcSV'; // ここに実際のAPIキーを設定
-    const url = `https://api.example.com/stocks?apikey=${apiKey}`; // 実際のAPI URLに置き換えてください
+    const url = https://api.example.com/stocks?apikey=${apiKey}; // 実際のAPI URLに置き換えてください
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -95,10 +95,10 @@ function displayStocks(stocks) {
     stocksList.innerHTML = ''; // 既存の株価をクリア
     stocks.forEach(stock => {
         const listItem = document.createElement('li');
-        listItem.innerHTML = `
+        listItem.innerHTML = 
             <h3>${stock.name}</h3>
             <p>現在の価格: ${stock.price}</p>
-        `;
+        ;
         stocksList.appendChild(listItem);
     });
 }
@@ -166,54 +166,4 @@ window.onload = function() {
     fetchNews();
     fetchStocks();
     createChart();
-    setupGame(); // ゲームの初期化
 };
-
-// ゲームの初期設定
-function setupGame() {
-    const gameCanvas = document.getElementById('gameCanvas');
-    const startGameBtn = document.getElementById('startGameBtn');
-    const gameStatus = document.getElementById('gameStatus');
-
-    // ゲームの初期設定
-    const gameContext = gameCanvas.getContext('2d');
-    let gameRunning = false;
-
-    // ゲーム開始ボタンのイベントリスナー
-    startGameBtn.addEventListener('click', () => {
-        if (!gameRunning) {
-            gameRunning = true;
-            gameStatus.textContent = 'ゲームがスタートしました！';
-            startGame();
-        }
-    });
-
-    // ゲームロジックのスタート
-    function startGame() {
-        // ゲームのロジックをここに追加
-        gameContext.fillStyle = 'black';
-        gameContext.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
-
-        // APIからゲームデータを取得する (例)
-        fetchGameData();
-    }
-
-    // ゲームデータをAPIから取得する
-    async function fetchGameData() {
-        const apiKey = '9d8d58893c837f8bbd312e76119ee292008384e0'; // 新しいAPIキー
-        const url = `https://api.example.com/game-data?apikey=${apiKey}`; // 実際のAPI URLに置き換えてください
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('ネットワークエラー');
-            }
-            const data = await response.json();
-            // ゲームデータの処理
-            console.log('ゲームデータ:', data);
-            // ゲームデータを使用して描画やロジックを実装
-        } catch (error) {
-            console.error('ゲームデータの取得に失敗しました:', error);
-        }
-    }
-}
-
