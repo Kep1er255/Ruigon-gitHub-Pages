@@ -4,6 +4,13 @@ function toggleMenu() {
     menu.classList.toggle('open');
 }
 
+function toggleMenu() {
+    const sideMenu = document.getElementById('sideMenu');
+    const isVisible = sideMenu.style.left === '0px';
+    sideMenu.style.left = isVisible ? '-250px' : '0px';
+}
+
+
 // ニュースを取得して表示する
 async function fetchNews() {
     const apiKey = '7801f74e6f980312dc085440b437b956';
