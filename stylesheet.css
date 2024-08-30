@@ -195,38 +195,3 @@ body {
     background-color: #f9f9f9;
 }
 
-#gameCard {
-    text-align: center;
-}
-
-#gameCanvas {
-    border: 2px solid #333;
-    background-color: #f4f4f4;
-}
-
-#startGameBtn {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#startGameBtn:hover {
-    background-color: #0056b3;
-}
-
-#gameDescription {
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-#gameStatus {
-    font-size: 16px;
-    color: #333;
-    margin-top: 10px;
-}
