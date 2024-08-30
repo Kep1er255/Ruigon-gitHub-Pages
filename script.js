@@ -4,6 +4,24 @@ function toggleMenu() {
     menu.classList.toggle('open');
 }
 
+
+// ニュースをHTMLに追加する
+function displayNews(articles) {
+    const newsList = document.getElementById('newsList');
+    newsList.innerHTML = ''; // 既存のニュースをクリア
+    articles.forEach(article => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+            <h3>${article.title}</h3>
+            <p>${article.description}</p>
+            <a href="${article.url}" target="_blank">続きを読む</a>
+        `;
+        newsList.appendChild(listItem);
+    });
+}
+
+
+
 // ニュースを取得して表示する
 async function fetchNews() {
     const apiKey = '1ea6cb85d8e4996c79c2702af1335e72';
