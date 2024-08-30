@@ -1,213 +1,232 @@
-  body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden; /* スライドメニューのために横スクロールを無効に */
-        }
+ body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* スライドメニューのために横スクロールを無効に */
+}
 
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 20px;
-        }
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
 
-        .header {
-            display: flex;
-            align-items: center;
-            position: relative;
-            padding-top: 20px;
-        }
+.header {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-top: 20px;
+}
 
-        .menu-icon {
-            font-size: 30px;
-            color: #333;
-            cursor: pointer;
-            margin-right: 10px; /* 少し右に配置 */
-            margin-left: 10px; /* 左側に配置 */
-        }
+.menu-icon {
+    font-size: 30px;
+    color: #333;
+    cursor: pointer;
+    margin-right: 10px; /* 少し右に配置 */
+    margin-left: 10px; /* 左側に配置 */
+}
 
-        .header h1 {
-            margin: 0;
-            font-size: 36px;
-            font-weight: bold;
-            color: #333;
-            text-align: center; /* Rui-Siteを中央に配置 */
-        }
+.header h1 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+    text-align: center; /* Rui-Siteを中央に配置 */
+}
 
-        .section-title {
-            display: inline-block;
-            position: relative;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-        }
+.section-title {
+    display: inline-block;
+    position: relative;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
 
-        .section-title::before {
-            content: '┃';
-            position: absolute;
-            left: -40px;
-            font-size: 30px;
-            color: #333;
-        }
+.section-title::before {
+    content: '┃';
+    position: absolute;
+    left: -40px;
+    font-size: 30px;
+    color: #333;
+}
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 50%;
-            height: 2px;
-            background-color: #333;
-            margin: 5px auto 0;
-        }
+.section-title::after {
+    content: '';
+    display: block;
+    width: 50%;
+    height: 2px;
+    background-color: #333;
+    margin: 5px auto 0;
+}
 
-        #weatherCard, #stocksCard, #newsCard, #toolsCard {
-            margin-top: 20px;
-        }
+#weatherCard, #stocksCard, #newsCard, #toolsCard {
+    margin-top: 20px;
+}
 
-        #newsCard {
-            text-align: left;
-        }
+#newsCard {
+    text-align: left;
+}
 
-        #toolsCard {
-            text-align: left;
-        }
+#toolsCard {
+    text-align: left;
+}
 
-        #relatedCards {
-            margin-top: 20px;
-        }
+#relatedCards {
+    margin-top: 20px;
+}
 
-        .rectangle {
-            background-color: white;
-            color: #333;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 600px;
-            cursor: pointer;
-            transition: background-color 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border: 1px solid #ddd;
-        }
+.rectangle {
+    background-color: white;
+    color: #333;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+}
 
-        .rectangle:hover {
-            background-color: #f9f9f9;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
+.rectangle:hover {
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
 
-        .rectangle-title {
-            font-size: 22px;
-            font-weight: bold;
-            margin: 0;
-        }
+.rectangle-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 0;
+}
 
-        .rectangle-description {
-            font-size: 16px;
-            margin: 10px 0;
-        }
+.rectangle-description {
+    font-size: 16px;
+    margin: 10px 0;
+}
 
-        .rectangle-date {
-            font-size: 14px;
-            color: #666;
-            margin: 0;
-        }
+.rectangle-date {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
 
-        /* Contributor Section */
-        #contributors {
-            margin-top: 20px;
-            text-align: left;
-        }
+/* Contributor Section */
+#contributors {
+    margin-top: 20px;
+    text-align: left;
+}
 
-        .contributor {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            overflow: hidden;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 10px;
-        }
+.contributor {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
 
-        .contributor-img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            cursor: pointer;
-        }
+.contributor-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
 
-        .contributor-info {
-            margin-left: 15px;
-        }
+.contributor-info {
+    margin-left: 15px;
+}
 
-        .contributor-name {
-            font-size: 18px;
-            font-weight: bold;
-            margin: 0;
-        }
+.contributor-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
 
-        .contributor-sns a {
-            text-decoration: none;
-            color: #007bff;
-        }
+.contributor-sns a {
+    text-decoration: none;
+    color: #007bff;
+}
 
-        .contributor-sns a:hover {
-            text-decoration: underline;
-        }
+.contributor-sns a:hover {
+    text-decoration: underline;
+}
 
-        /* Side Menu */
-        #sideMenu {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 250px;
-            height: 100%;
-            background-color: #333;
-            color: white;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-            padding: 20px;
-            overflow-y: auto;
-        }
+/* Side Menu */
+#sideMenu {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: left 0.3s;
+    overflow-y: auto;
+    z-index: 1000;
+}
 
-        #sideMenu.open {
-            transform: translateX(0);
-        }
+#sideMenu.open {
+    left: 0;
+}
 
-        .menu-close {
-            font-size: 30px;
-            color: #fff;
-            cursor: pointer;
-            display: block;
-            text-align: right;
-            margin-bottom: 20px;
-        }
+.menu-close {
+    display: block;
+    text-align: right;
+    font-size: 30px;
+    padding: 10px;
+    cursor: pointer;
+}
 
-        #sideMenu a {
-            display: block;
-            color: white;
-            text-decoration: none;
-            margin: 10px 0;
-            font-size: 18px;
-        }
+#sideMenu a {
+    display: block;
+    padding: 15px;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #ddd;
+}
 
-        #sideMenu a:hover {
-            text-decoration: underline;
-        }
+#sideMenu a:hover {
+    background-color: #f9f9f9;
+}
 
-        #weatherChart, #stockChart {
-            width: 100%;
-            height: 300px;
-        }
+#gameCard {
+    text-align: center;
+}
 
-        #stocksList, #newsList {
-            list-style-type: none;
-            padding: 0;
-        }
+#gameCanvas {
+    border: 2px solid #333;
+    background-color: #f4f4f4;
+}
 
-        #stocksList li, #newsList li {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
+#startGameBtn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#startGameBtn:hover {
+    background-color: #0056b3;
+}
+
+#gameDescription {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#gameStatus {
+    font-size: 16px;
+    color: #333;
+    margin-top: 10px;
+}
