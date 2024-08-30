@@ -6,8 +6,8 @@ function toggleMenu() {
 
 // ニュースを取得して表示する
 async function fetchNews() {
-    const apiKey = '1ea6cb85d8e4996c79c2702af1335e72';
-    const url = `https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=us&max=10&apikey=${apiKey}`;
+    const apiKey = '7801f74e6f980312dc085440b437b956';
+    const url = `https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=us&max=10&apikey=7801f74e6f980312dc085440b437b956`;
     try {
         const response = await fetch(url);
         if (!response.ok) {
