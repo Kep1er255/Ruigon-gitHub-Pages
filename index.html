@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ruigon-gitHub-Pages</title>
-  <link rel="stylesheet" href="https://Ruigon.github.io/Ruigon-gitHub-Pages/stylesheet.css">
+    <link rel="stylesheet" href="https://Ruigon.github.io/Ruigon-gitHub-Pages/stylesheet.css">
 </head>
 <body>
     <div class="container">
@@ -18,20 +18,15 @@
         </div>
         <div id="stocksCard">
             <h2 class="section-title">株価</h2>
-            <canvas id="stockChart"></canvas> <!-- グラフを表示するためのキャンバス -->
-            <ul id="stocksList">
-                <!-- 株価項目がここに追加されます -->
-            </ul>
+            <canvas id="stockChart"></canvas>
+            <ul id="stocksList"></ul>
         </div>
         <div id="newsCard">
             <h2 class="section-title">最新ニュース</h2>
-            <ul id="newsList">
-                <!-- ニュース項目がここに追加されます -->
-            </ul>
+            <ul id="newsList"></ul>
         </div>
         <div id="toolsCard">
             <h2 class="section-title">Tools</h2>
-            <!-- Toolsの内容をここに追加 -->
         </div>
         <div id="relatedCards">
             <div class="rectangle" onclick="window.location.href='https://ruigon.github.io/calculator/';">
@@ -81,11 +76,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById('sideMenu');
-            menu.classList.toggle('open');
-        }
-    </script>
 </body>
 </html>
