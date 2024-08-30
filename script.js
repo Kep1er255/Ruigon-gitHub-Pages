@@ -194,6 +194,26 @@ function setupGame() {
         gameContext.fillStyle = 'black';
         gameContext.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
 
-        // ここでゲームの描画やロジックを追加
+        // APIからゲームデータを取得する (例)
+        fetchGameData();
+    }
+
+    // ゲームデータをAPIから取得する
+    async function fetchGameData() {
+        const apiKey = '9d8d58893c837f8bbd312e76119ee292008384e0'; // 新しいAPIキー
+        const url = `https://api.example.com/game-data?apikey=${apiKey}`; // 実際のAPI URLに置き換えてください
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('ネットワークエラー');
+            }
+            const data = await response.json();
+            // ゲームデータの処理
+            console.log('ゲームデータ:', data);
+            // ゲームデータを使用して描画やロジックを実装
+        } catch (error) {
+            console.error('ゲームデータの取得に失敗しました:', error);
+        }
     }
 }
+
