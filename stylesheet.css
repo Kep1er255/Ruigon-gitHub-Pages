@@ -1,11 +1,3 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* スライドメニューのために横スクロールを無効に */
-}
-
 .container {
     width: 80%;
     margin: 0 auto;
@@ -45,18 +37,7 @@ body {
     color: #333;
 }
 
-.section-title-left {
-    display: inline-block;
-    position: relative;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    text-align: left;
-}
-
-.section-title-left::before {
+.section-title::before {
     content: '┃';
     position: absolute;
     left: -40px;
@@ -64,7 +45,7 @@ body {
     color: #333;
 }
 
-.section-title-left::after {
+.section-title::after {
     content: '';
     display: block;
     width: 50%;
@@ -160,26 +141,26 @@ body {
 }
 
 .contributor-sns a {
-    margin-right: 10px;
-    color: #333;
     text-decoration: none;
+    color: #007bff;
 }
 
 .contributor-sns a:hover {
     text-decoration: underline;
 }
 
+/* Side Menu */
 #sideMenu {
     position: fixed;
     top: 0;
     left: -250px;
     width: 250px;
     height: 100%;
-    background-color: #333;
-    color: white;
-    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     transition: left 0.3s;
     overflow-y: auto;
+    z-index: 1000;
 }
 
 #sideMenu.open {
@@ -187,22 +168,23 @@ body {
 }
 
 .menu-close {
+    display: block;
+    text-align: right;
     font-size: 30px;
+    padding: 10px;
     cursor: pointer;
-    position: absolute;
-    top: 20px;
-    right: 20px;
 }
 
 #sideMenu a {
     display: block;
-    color: white;
+    padding: 15px;
+    color: #333;
     text-decoration: none;
-    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
 }
 
 #sideMenu a:hover {
-    text-decoration: underline;
+    background-color: #f9f9f9;
 }
 
 #gameCard {
@@ -210,20 +192,33 @@ body {
 }
 
 #gameCanvas {
-    border: 1px solid #000;
+    border: 2px solid #333;
+    background-color: #f4f4f4;
 }
 
 #startGameBtn {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
+    margin-top: 20px;
     padding: 10px 20px;
     font-size: 16px;
-    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
     border-radius: 5px;
-    margin-top: 10px;
+    cursor: pointer;
 }
 
 #startGameBtn:hover {
     background-color: #0056b3;
+}
+
+#gameDescription {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#gameStatus {
+    font-size: 16px;
+    color: #333;
+    margin-top: 10px;
 }
