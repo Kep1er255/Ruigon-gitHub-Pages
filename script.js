@@ -7,7 +7,7 @@ function toggleMenu() {
 // ニュースを取得して表示する
 async function fetchNews() {
     const apiKey = '1ea6cb85d8e4996c79c2702af1335e72';
-    const url = https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=us&max=10&apikey=${apiKey};
+    const url = `https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=us&max=10&apikey=${apiKey}`;
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -33,7 +33,7 @@ async function translateArticles(articles) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': Bearer ${apiKey}
+                    'Authorization': `Bearer ${apiKey}`
                 },
                 body: JSON.stringify({
                     text: article.title + '\n' + article.description,
@@ -64,11 +64,11 @@ function displayNews(articles) {
     newsList.innerHTML = ''; // 既存のニュースをクリア
     articles.forEach(article => {
         const listItem = document.createElement('li');
-        listItem.innerHTML = 
+        listItem.innerHTML = `
             <h3>${article.title}</h3>
             <p>${article.description}</p>
             <a href="${article.url}" target="_blank">続きを読む</a>
-        ;
+        `;
         newsList.appendChild(listItem);
     });
 }
@@ -76,7 +76,7 @@ function displayNews(articles) {
 // 株価データを取得して表示する (例)
 async function fetchStocks() {
     const apiKey = 'h4p6gCFDsDOVVIoG5kmL5sOai7x8UcSV'; // ここに実際のAPIキーを設定
-    const url = https://api.example.com/stocks?apikey=${apiKey}; // 実際のAPI URLに置き換えてください
+    const url = `https://api.example.com/stocks?apikey=${apiKey}`; // 実際のAPI URLに置き換えてください
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -95,10 +95,10 @@ function displayStocks(stocks) {
     stocksList.innerHTML = ''; // 既存の株価をクリア
     stocks.forEach(stock => {
         const listItem = document.createElement('li');
-        listItem.innerHTML = 
+        listItem.innerHTML = `
             <h3>${stock.name}</h3>
             <p>現在の価格: ${stock.price}</p>
-        ;
+        `;
         stocksList.appendChild(listItem);
     });
 }
@@ -166,4 +166,9 @@ window.onload = function() {
     fetchNews();
     fetchStocks();
     createChart();
+    setupGame(); // ゲームの初期化
 };
+
+
+
+   
