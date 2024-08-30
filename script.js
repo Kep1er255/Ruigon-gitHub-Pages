@@ -168,7 +168,3 @@ window.onload = function() {
     createChart();
     setupGame(); // ゲームの初期化
 };
-
-
-
-   
