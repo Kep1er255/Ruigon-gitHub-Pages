@@ -58,23 +58,6 @@ async function translateArticles(articles) {
     return translatedArticles;
 }
 
-
-// ニュースをHTMLに追加する
-function displayNews(articles) {
-    const newsList = document.getElementById('newsList');
-    newsList.innerHTML = ''; // 既存のニュースをクリア
-    articles.forEach(article => {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `
-            <h3>${article.title}</h3>
-            <p>${article.description}</p>
-            <a href="${article.url}" target="_blank">続きを読む</a>
-        `;
-        newsList.appendChild(listItem);
-    });
-}
-
-
 // ニュースをHTMLに追加する
 function displayNews(articles) {
     const newsList = document.getElementById('newsList');
@@ -183,5 +166,4 @@ window.onload = function() {
     fetchNews();
     fetchStocks();
     createChart();
-    setupGame(); // ゲームの初期化
 };
