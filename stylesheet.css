@@ -172,6 +172,10 @@ body {
     z-index: 1000;
 }
 
+#sideMenu.open {
+    left: 0; /* メニューを表示する状態 */
+}
+
 #sideMenu a {
     display: block;
     padding: 10px 20px;
