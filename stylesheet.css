@@ -48,8 +48,8 @@ body {
 .section-title::before {
     content: '┃';
     position: absolute;
-    left: -40px;
-    font-size: 30px;
+    left: -30px; /* 左から少しだけ離す */
+    font-size: 28px; /* サイズを少し小さくしてバランスを取る */
     color: #333;
     top: 50%;
     transform: translateY(-50%);
@@ -58,7 +58,7 @@ body {
 .section-title::after {
     content: '';
     display: block;
-    width: 50%;
+    width: 60%; /* 横線を少し長くしてバランスを取る */
     height: 2px;
     background-color: #333;
     margin: 5px auto 0;
@@ -207,11 +207,11 @@ body {
     }
 
     .section-title::before {
-        left: -20px; /* スマホでも見やすいように少し左に寄せる */
-        font-size: 24px; /* スマホ画面に合わせてサイズを調整 */
+        left: -15px; /* 壁からもう少し離す */
+        font-size: 24px; /* サイズをさらに調整 */
     }
 
     .section-title::after {
-        width: 40%; /* 余白が小さいため、線の幅を少し縮める */
+        width: 50%; /* 余白に合わせて横線の幅を調整 */
     }
 }
