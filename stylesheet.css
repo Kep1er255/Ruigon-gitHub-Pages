@@ -205,4 +205,13 @@ body {
         width: 100%;
         padding: 10px;
     }
+
+    .section-title::before {
+        left: -20px; /* スマホでも見やすいように少し左に寄せる */
+        font-size: 24px; /* スマホ画面に合わせてサイズを調整 */
+    }
+
+    .section-title::after {
+        width: 40%; /* 余白が小さいため、線の幅を少し縮める */
+    }
 }
