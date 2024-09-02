@@ -28,35 +28,42 @@
         <div id="toolsCard">
             <h2 class="section-title">Tools</h2>
             
-            <!-- Problem Report Form -->
-            <div id="reportCard">
-                <h3 class="section-title">問題報告</h3>
-                <form action="https://formspree.io/f/mleqqylb" method="POST">
-                    <label for="name">お名前:</label>
-                    <input type="text" id="name" name="name" required>
-
-                    <label for="email">メールアドレス:</label>
-                    <input type="email" id="email" name="email" required>
-
-                    <label for="message">メッセージ:</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-
-                    <button type="submit">送信</button>
-                </form>
-            </div>
-        </div>
-        <div id="relatedCards">
+            <!-- Tools Card 1 -->
             <div class="rectangle" onclick="window.location.href='https://ruigon.github.io/calculator/';">
                 <h3 class="rectangle-title">calculator</h3>
                 <p class="rectangle-description">この電卓は、複数の数値を入力し、平均値と中央値を計算します。入力フィールドは3x3のグリッドで整理され、簡単に操作できます。</p>
                 <p class="rectangle-date">日付: 2024-08-29</p>
             </div>
+
+            <!-- Tools Card 2 -->
             <div class="rectangle" onclick="window.location.href='https://example.com/page2';">
                 <h3 class="rectangle-title">タイトル名 2</h3>
                 <p class="rectangle-description">別の説明がここに入ります。説明がここに入ります。説明がここに入ります。</p>
                 <p class="rectangle-date">日付: 2024-08-30</p>
             </div>
         </div>
+        
+        <!-- 問題報告セクション -->
+        <div id="reportCard">
+            <h3 class="section-title">問題報告</h3>
+            <form action="https://formspree.io/f/mleqqylb" method="POST">
+                <label for="name">お名前:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">メールアドレス:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">メッセージ:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <button type="submit">送信</button>
+            </form>
+        </div>
+        
+        <div id="relatedCards">
+            <!-- 他の関連カードがここに続く -->
+        </div>
+        
         <div id="contributors">
             <h2 class="section-title">作成者＆協力者</h2>
             <div class="contributor">
@@ -82,15 +89,15 @@
         </div>
     </div>
 
-<div id="sideMenu">
-    <span class="menu-close" onclick="toggleMenu()">×</span>
-    <a href="#weatherCard">東京の天気予報</a>
-    <a href="#stocksCard">株価</a>
-    <a href="#newsCard">最新ニュース</a>
-    <a href="#toolsCard">Tools</a>
-    <a href="#reportIssue">問題報告</a> <!-- ここを追加 -->
-    <a href="#contributors">作成者＆協力者</a>
-</div>
+    <div id="sideMenu">
+        <span class="menu-close" onclick="toggleMenu()">×</span>
+        <a href="#weatherCard">東京の天気予報</a>
+        <a href="#stocksCard">株価</a>
+        <a href="#newsCard">最新ニュース</a>
+        <a href="#toolsCard">Tools</a>
+        <a href="#reportCard">問題報告</a> <!-- 修正したリンク -->
+        <a href="#contributors">作成者＆協力者</a>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
