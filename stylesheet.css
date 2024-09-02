@@ -238,19 +238,28 @@ body {
     flex-direction: column;
 }
 
+#reportIssue .form-group {
+    margin-bottom: 15px;
+}
+
 #reportIssue label {
-    margin-top: 10px;
+    display: block;
+    margin-bottom: 5px;
     font-weight: bold;
 }
 
 #reportIssue input,
 #reportIssue textarea {
-    margin-top: 5px;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ddd;
     width: 100%; /* フォーム要素の幅を100%に設定 */
     box-sizing: border-box; /* パディングとボーダーを含めて幅を計算 */
+}
+
+#reportIssue input[type="text"],
+#reportIssue input[type="email"] {
+    height: 40px; /* テキストフィールドの高さを設定 */
 }
 
 #reportIssue textarea {
@@ -273,5 +282,3 @@ body {
 #reportIssue button:hover {
     background-color: #555;
 }
-
-
