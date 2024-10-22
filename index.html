@@ -3,107 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruigon-gitHub-Pages</title>
-    <link rel="icon" sizes="32x32" href="neko.png" type="image/png">
-    <link rel="stylesheet" href="https://Kep1er255.github.io/Ruigon-gitHub-Pages/stylesheet.css">
+    <link rel="stylesheet" href="https://Kep1er255.github.io/file/stylesheet.css">
+    <title>写真倉庫</title>
+    <style>
+        /* 簡単なスタイルを追加 */
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 200px;
+            margin: 20px auto;
+            justify-content: center;
+        }
+        .number-button {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #000;
+            border-radius: 50%;
+            background-color: white;
+            color: black;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .number-button:hover {
+            background-color: #f0f0f0;
+        }
+        #input-display {
+            font-size: 24px;
+            margin: 20px;
+            text-align: center;
+        }
+        #password-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000; /* 他の要素の上に表示 */
+        }
+        .modal-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* 背景を暗くする */
+            z-index: 999; /* モーダルよりも下に表示 */
+            display: none; /* 初期は非表示 */
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <span class="menu-icon" onclick="toggleMenu()">☰</span>
-            <h1>Ruigon gitHub Pages</h1>
-        </div>
-        <div id="weatherCard">
-            <h2 class="section-title">東京の天気予報</h2>
-            <canvas id="weatherChart"></canvas>
-        </div>
-        <div id="stocksCard">
-            <h2 class="section-title">株価</h2>
-            <canvas id="stockChart"></canvas>
-            <ul id="stocksList"></ul>
-        </div>
-        <div id="newsCard">
-            <h2 class="section-title">最新ニュース</h2>
-            <ul id="newsList"></ul>
-        </div>
-        <div id="toolsCard">
-            <h2 class="section-title">Tools</h2>
+        <header>
+            <div class="header-content">
+                <div class="photo">
+                    <img src="igarasi.jpg" alt="" class="profile-photo"> <!-- ここに写真のパスを入れてください -->
+                </div>
+                <div class="text-section">
+                    <div class="site-title" id="siteTitle">五十嵐琉偉の写真倉庫</div> <!-- サイトタイトル -->
+                    <div class="separator"></div> <!-- 上のセパレーター -->
+                    <div class="description" id="description">昔撮った写真や色々な写真があります。ファイルをクリックしたら写真がみれます。写真の読み込みが遅いです。</div> <!-- サイトの説明文 -->
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <div class="folder" onclick="toggleFiles('folder1')">
+                <div class="folder-icon">📁</div>
+                <span>🔏五十嵐琉偉の写真倉庫【暗証番号付き】</span>
+            </div>
+            <div class="file-list" id="folder1" style="display: none;">
+                <div class="file">
+                    <div class="file-icon">📄</div> <!-- ファイルアイコン -->
+                   <a href="kusatu.html" class="file-link">草津.rtf 日付2015/10/18</a> 
+                </div>
+                <div class="file">
+                    <div class="file-icon">📄</div> <!-- ファイルアイコン -->
+                    <a href="javascript:void(0);" class="file-link" onclick="showPasswordInput('shimonita.html')">下仁田.rtf 日付2013/12/31</a> <!-- 暗証番号をチェック -->
+                </div>
+            </div>
+            <div class="folder" onclick="toggleFiles('folder2')">
+                <div class="folder-icon">📁</div>
+                <span>更新のお知らせ＆サイトの説明</span>
+            </div>
+            <div class="file-list" id="folder2" style="display: none;">
+                <div class="file">
+                    <div class="file-icon">📄</div> <!-- ファイルアイコン -->
+                    <a href="setumei.html" class="file-link">説明.txt</a> <!-- ファイル3へのリンク -->
+                </div>
+                <div class="file">
+                    <div class="file-icon">📄</div> <!-- ファイルアイコン -->
+                    <a href="osirase.html" class="file-link">お知らせ.txt</a> <!-- ファイル4へのリンク -->
+                </div>
+            </div>
+
+            <!-- モーダルの背景 -->
+            <div class="modal-background" id="modal-background"></div>
             
-            <!-- Tools Card 1 -->
-            <div class="rectangle" onclick="window.location.href='https://ruigon.github.io/calculator/';">
-                <h3 class="rectangle-title">calculator</h3>
-                <p class="rectangle-description">この電卓は、複数の数値を入力し、平均値と中央値を計算します。入力フィールドは3x3のグリッドで整理され、簡単に操作できます。</p>
-                <p class="rectangle-date">日付: 2024-08-29</p>
-            </div>
-
-            <!-- Tools Card 2 -->
-            <div class="rectangle" onclick="window.location.href='https://example.com/page2';">
-                <h3 class="rectangle-title">作成中</h3>
-                <p class="rectangle-description">wait</p>
-                <p class="rectangle-date">日付: 2024-08-30</p>
-            </div>
-        </div>
-        
-        <!-- 問題報告セクション -->
-        <div id="reportCard">
-            <h3 class="section-title">問題報告</h3>
-               <form action="https://formspree.io/f/mleqqylb" method="POST">
-        <div class="form-group">
-            <label for="name">名前</label>
-            <input type="text" id="name" name="name" placeholder="名前を入力してください">
-        </div>
-        <div class="form-group">
-            <label for="email">メールアドレス</label>
-            <input type="email" id="email" name="email" placeholder="メールアドレスを入力してください">
-        </div>
-        <div class="form-group">
-            <label for="message">メッセージ</label>
-            <textarea id="message" name="message" placeholder="問題の詳細を入力してください"></textarea>
-        </div>
-        <button type="submit">送信</button>
-    </form>
-</div>
-        
-        <div id="relatedCards">
-            <!-- 他の関連カードがここに続く -->
-        </div>
-        
-        <div id="contributors">
-            <h2 class="section-title">作成者＆協力者</h2>
-            <div class="contributor">
-                <img src="mero.jpg" alt="協力者1" class="contributor-img" onclick="window.open('https://twitter.com/contributor1', '_blank');">
-                <div class="contributor-info">
-                    <p class="contributor-name">Ruigon(作成者)</p>
-                    <p class="contributor-sns">
-                        <a href="https://x.com/Ruigon_" target="_blank">Twitter</a> |
-                        <a href="https://github.com/Ruigon" target="_blank">GitHub</a>
-                    </p>
+            <!-- 暗証番号入力エリア -->
+            <div id="password-modal">
+                <div id="input-display">入力: </div>
+                <div class="button-container" id="button-container">
+                    <div class="number-button" onclick="addToInput('1')">1</div>
+                    <div class="number-button" onclick="addToInput('2')">2</div>
+                    <div class="number-button" onclick="addToInput('3')">3</div>
+                    <div class="number-button" onclick="addToInput('4')">4</div>
+                    <div class="number-button" onclick="addToInput('5')">5</div>
+                    <div class="number-button" onclick="addToInput('6')">6</div>
+                    <div class="number-button" onclick="addToInput('7')">7</div>
+                    <div class="number-button" onclick="addToInput('8')">8</div>
+                    <div class="number-button" onclick="addToInput('9')">9</div>
+                    <div class="number-button" onclick="addToInput('0')">0</div>
+                    <div class="number-button" onclick="checkPassword()">OK</div> <!-- 確認ボタン -->
+                    <div class="number-button" onclick="clearInput()">C</div> <!-- クリアボタン -->
                 </div>
             </div>
-            <div class="contributor">
-                <img src="aru.jfif" alt="協力者2" class="contributor-img" onclick="window.open('https://twitter.com/contributor2', '_blank');">
-                <div class="contributor-info">
-                    <p class="contributor-name">Ayane</p>
-                    <p class="contributor-sns">
-                        <a href="https://www.youtube.com/@user-jw6ss7dj7r" target="_blank">Youtube</a> |
-                        <a href="https://github.com/ayane-o7" target="_blank">GitHub</a>
-                    </p>
-                </div>
-            </div>
-        </div>
+        </main>
     </div>
 
-    <div id="sideMenu">
-        <span class="menu-close" onclick="toggleMenu()">×</span>
-        <a href="#weatherCard">東京の天気予報</a>
-        <a href="#stocksCard">株価</a>
-        <a href="#newsCard">最新ニュース</a>
-        <a href="#toolsCard">Tools</a>
-        <a href="#reportCard">問題報告</a> <!-- 修正したリンク -->
-        <a href="#contributors">作成者＆協力者</a>
-    </div>
+    <script>
+        let inputNumber = '';
+        let targetPage = ''; // 遷移先ページを保存する変数
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="script.js"></script>
+        function addToInput(number) {
+            if (inputNumber.length < 4) { // 4文字までの制限
+                inputNumber += number;
+                document.getElementById('input-display').innerText = '入力: ' + inputNumber;
+            }
+        }
+
+        function checkPassword() {
+            if (inputNumber === "0908" && targetPage) {
+                window.location.href = targetPage; // 正しい番号が入力されたらファイルを開く
+            } else if (inputNumber !== "0908") {
+                alert("暗証番号が間違っています。");
+                clearInput(); // 間違った場合はクリア
+            }
+        }
+
+        function clearInput() {
+            inputNumber = '';
+            document.getElementById('input-display').innerText = '入力: ';
+        }
+
+        function toggleFiles(folderId) {
+            const folder = document.getElementById(folderId);
+            folder.style.display = folder.style.display === "none" ? "block" : "none";
+        }
+
+        function showPasswordInput(page) {
+            targetPage = page; // 遷移先ページを設定
+            document.getElementById('modal-background').style.display = 'block'; // 背景を表示
+            document.getElementById('password-modal').style.display = 'block'; // 入力モーダルを表示
+            document.getElementById('input-display').innerText = '入力: ';
+            inputNumber = '';
+            document.getElementById('button-container').style.display = 'flex'; // ボタンを表示
+        }
+
+        // モーダル背景をクリックするとモーダルを閉じる
+        document.getElementById('modal-background').onclick = function() {
+            document.getElementById('modal-background').style.display = 'none';
+            document.getElementById('password-modal').style.display = 'none';
+            clearInput(); // 入力をクリア
+        }
+    </script>
 </body>
 </html>
